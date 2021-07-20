@@ -55,6 +55,8 @@
               }}
             </h6>
             <hr />
+            <h6>Duration : {{ detail.runtime }}</h6>
+            <hr />
             <h6>Popularity : {{ detail.popularity }}</h6>
             <hr />
             <div class="show-desktop-tablet">
@@ -108,7 +110,7 @@
           </div>
         </div>
         <div class="row p-5 show-only-desktop">
-          <h3 class="mb-3">Overview</h3>
+          <h3 class="mb-3 w-100">Overview</h3>
           <h6>{{ detail.overview }}</h6>
         </div>
         <div class="row py-5 px-3 show-tablet-mobile">
@@ -240,6 +242,17 @@ export default {
         `https://api.themoviedb.org/3/movie/${this.$route.query.id}?api_key=5aeb53d2e95dd778417b0eda692a733e&language=en-US`
       )
         .then(({ data }) => {
+          let hour = 0;
+
+          for (let i = 1; i < 24; i++) {
+            if (data.runtime / i > 60) hour++;
+          }
+
+          data.runtime =
+            hour > 0
+              ? `${hour} hour ${data.runtime - 60 * hour} minute`
+              : `${data.runtime} minute`;
+
           this.detail = data;
           this.titleHead = `Movies24 - ${data.title}`;
           this.metaHead = [
