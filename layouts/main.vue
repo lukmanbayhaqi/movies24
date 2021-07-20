@@ -6,7 +6,7 @@
       class="d-flex justify-content-center align-items-center w-100"
       v-if="isLoading"
     >
-      <b-spinner variant="danger" label="loading"></b-spinner>
+      <b-spinner variant="danger" label="loading" />
     </div>
   </div>
 </template>
