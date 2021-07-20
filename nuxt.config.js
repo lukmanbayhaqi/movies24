@@ -3,14 +3,45 @@ export default {
   ssr: false,
 
   head: {
-    title: "movies24",
+    title: "Movies24",
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: "" },
-      { name: "format-detection", content: "telephone=no" }
+      { hid: "keywords", name: "keywords", content: "Movies24 Lukman Bayhaqi" },
+      {
+        hid: "description",
+        name: "description",
+        content:
+          "List movies using TMDB API that show to you now playing movies around the world created by Lukman Bayhaqi"
+      },
+      { "data-rh": true, property: "og:title", content: "Movies24" },
+      { "data-rh": true, property: "og:site_name", content: "Movies24" },
+      {
+        "data-rh": true,
+        property: "og:description",
+        content:
+          "List movies using TMDB API that show to you now playing movies around the world created by Lukman Bayhaqi"
+      },
+      { "data-rh": true, property: "og:url", content: "movies24-lukman" },
+      {
+        "data-rh": true,
+        property: "og:image",
+        content:
+          "https://tvadvertising.uk/wp-content/uploads/2017/12/movies24.png"
+      },
+      {
+        "data-rh": true,
+        property: "og:image:secure_url",
+        content:
+          "https://tvadvertising.uk/wp-content/uploads/2017/12/movies24.png"
+      },
+      { "data-rh": true, property: "og:image:type", content: "image/png" },
+      { "data-rh": true, property: "og:image:width", content: "1200" },
+      { "data-rh": true, property: "og:image:height", content: "1200" },
+      { "data-rh": true, property: "og:image:alt", content: "Movies24" },
+      { "data-rh": true, property: "og:type", content: "website" }
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
+    link: [{ rel: "icon", type: "image/x-icon", href: "/icon.png" }]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css

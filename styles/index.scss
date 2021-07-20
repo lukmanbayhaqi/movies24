@@ -23,10 +23,6 @@ i {
   display: block;
   text-shadow: 0 2px 3px #000;
   line-height: 1em;
-
-  // &:hover {
-  // color: black;
-  // }
 }
 
 hr {
@@ -80,12 +76,9 @@ $desktop: 778px;
 .my-card {
   .card {
     border: none;
-    // border-radius: 5px;
     background-color: transparent;
 
     &:hover {
-      // border: 0.5px solid skyblue;
-      // border-radius: 5px;
       cursor: pointer;
     }
 

@@ -188,8 +188,28 @@ export default {
     detail: {},
     similiarMovies: [],
     showChevronUp: false,
-    isShowMore: false
+    isShowMore: false,
+    titleHead: "Movies24",
+    metaHead: [
+      {
+        hid: "keywords",
+        name: "keywords",
+        content: "Movies24 Lukman Bayhaqi"
+      },
+      {
+        hid: "description",
+        name: "description",
+        content:
+          "List movies using TMDB API that show to you now playing movies around the world created by Lukman Bayhaqi"
+      }
+    ]
   }),
+  head() {
+    return {
+      title: this.titleHead,
+      meta: this.metaHead
+    };
+  },
   created() {
     window.scrollTo(0, 0);
     window.addEventListener("scroll", this.handleScroll);
@@ -198,7 +218,12 @@ export default {
     window.removeEventListener("scroll", this.handleScroll);
   },
   mounted() {
-    if (JSON.stringify(this.$route.query) === "{}") router.push("/");
+    if (
+      JSON.stringify(this.$route.query) === "{}" ||
+      !this.$route.query.id ||
+      this.$route.query.id === ""
+    )
+      this.$router.push("/");
     else this.fetchDetailMovie();
   },
   computed: {
@@ -216,6 +241,19 @@ export default {
       )
         .then(({ data }) => {
           this.detail = data;
+          this.titleHead = `Movies24 - ${data.title}`;
+          this.metaHead = [
+            {
+              hid: "keywords",
+              name: "keywords",
+              content: `Film ${data.title}`
+            },
+            {
+              hid: "description",
+              name: "description",
+              content: data.overview
+            }
+          ];
 
           return get(
             `https://api.themoviedb.org/3/movie/${this.$route.query.id}/similar?api_key=5aeb53d2e95dd778417b0eda692a733e&page=1`
@@ -224,7 +262,7 @@ export default {
         .then(({ data }) => {
           this.similiarMovies = data.results;
         })
-        .catch(console.log)
+        .catch(console.error)
         .finally(() => (this.isLoading = false));
     },
     handleScroll(e) {
