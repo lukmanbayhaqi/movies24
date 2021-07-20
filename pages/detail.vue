@@ -20,7 +20,7 @@
             />
           </div>
           <div class="col-lg-8">
-            <h1>{{ detail.title }}</h1>
+            <h1 class="mt-3">{{ detail.title }}</h1>
             <i class="mt-3">{{ detail.tagline }}</i>
             <hr />
             <div class="show-desktop-tablet">
