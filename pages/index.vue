@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div
+    class="h-100"
+    style="background-color: rgba(46, 55, 64, 0.84); min-height: 100vh;"
+  >
     <!-- Container -->
     <div
       class="w-100 d-flex flex-wrap justify-content-around pt-5"
@@ -9,7 +12,7 @@
     >
       <div
         class="my-card mb-5"
-        v-for="({ title, favorite, poster_path }, i) in returnMovies"
+        v-for="({ title, poster_path, id }, i) in returnMovies"
         :key="i"
       >
         <b-card
@@ -17,27 +20,15 @@
           :img-src="`https://image.tmdb.org/t/p/w500/${poster_path}`"
           :img-alt="title"
           overlay
-          @click="() => $router.push(`/detail/${returnIndexPokemon()}`)"
+          @click="detailMovie(id)"
         />
         <div class="d-flex justify-content-around align-items-center my-2">
           <h5>
-            <b class="movie-title-home">
-              <router-link :to="`/detail/${returnIndexPokemon()}`">
+            <b class="movie-title-home text-center">
+              <a :href="detailMovie(id, true)" target="_blank">
                 {{ title }}
-              </router-link>
+              </a>
             </b>
-          </h5>
-
-          <h5>
-            <b-icon
-              :id="favorite ? 'remove-from-favorite' : 'add-to-favorite'"
-              style="cursor: pointer;"
-              :icon="favorite ? 'suit-heart-fill' : 'suit-heart'"
-              :color="favorite ? 'red' : 'orangered'"
-              @click="addToFavorite(i)"
-              v-b-tooltip.hover
-              :title="favorite ? 'remove from favorite' : 'add to favorite'"
-            />
           </h5>
         </div>
       </div>
@@ -61,13 +52,6 @@
         <h4><b-icon icon="chevron-up" color="white" /></h4>
       </button>
     </div>
-
-    <b-tooltip target="add-to-favorite" triggers="hover">
-      Add To Favorite
-    </b-tooltip>
-    <b-tooltip target="remove-from-favorite" triggers="hover">
-      Remove From Favorite
-    </b-tooltip>
   </div>
 </template>
 
@@ -88,14 +72,10 @@ export default {
   },
   computed: {
     returnMovies() {
-      // return this.$store.state.movieList;
-      return this.movieList;
+      return this.$store.state.movie.movieList;
     }
   },
   methods: {
-    addToFavorite(index) {
-      this.$store.commit("setFavorite", { index });
-    },
     handleScroll(e) {
       let {
         scrollTop,
@@ -110,7 +90,7 @@ export default {
         this.isLoading = true;
 
         this.$store
-          .dispatch("loadMoreMovies")
+          .dispatch("movie/loadMoreMovies")
           .then(() => {})
           .catch(() => {})
           .finally(() => (this.isLoading = false));
@@ -125,9 +105,9 @@ export default {
         inline: "nearest"
       });
     },
-    returnIndexPokemon(url) {
-      // const arr = url.split("/");
-      // return arr[arr.length - 2];
+    detailMovie(id, isHref) {
+      if (isHref) return `${window.location.origin}/detail?id=${id}`;
+      else window.open(`${window.location.origin}/detail?id=${id}`, "_blank");
     }
   }
 };
@@ -135,15 +115,18 @@ export default {
 
 <style lang="scss">
 .movie-title-home {
-  width: 10vw;
+  color: #fff !important;
   display: block;
-  line-height: 1em;
-
   text-shadow: 0 2px 3px #000;
   line-height: 1em;
 
-  a {
-    color: #fff !important;
+  width: 70vw;
+
+  @media only screen and (min-width: 600px) {
+    width: 35vw;
+  }
+  @media only screen and (min-width: 800px) {
+    width: 15vw;
   }
 }
 </style>

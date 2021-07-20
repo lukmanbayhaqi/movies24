@@ -19,33 +19,16 @@
       <b-navbar-nav>
         <b-nav-item class="mt-2 ml-3" @click="changePage('/')">
           <div class="d-flex flex-row align-items-center">
-            <h4
-              class="d-flex justify-content-center align-items-center"
-              style="color: whitesmoke"
-            >
-              <b-icon
-                icon="house-door-fill"
-                font-scale="0.9"
-                class="mr-2"
-                color="red"
-              />
-              Home
-            </h4>
-          </div>
-        </b-nav-item>
-        <b-nav-item class="mt-2 ml-3" @click="changePage('/favorite')">
-          <div class="d-flex flex-row align-items-center">
-            <h4
-              class="d-flex justify-content-center align-items-center"
-              style="color: whitesmoke"
-            >
-              <b-icon
-                icon="suit-heart-fill"
-                font-scale="0.9"
-                class="mr-2"
-                color="red"
-              />
-              Favorite
+            <h4 style="color: whitesmoke">
+              <b class="d-flex justify-content-center align-items-center">
+                <b-icon
+                  icon="house-door-fill"
+                  font-scale="0.9"
+                  class="mr-2"
+                  color="red"
+                />
+                Home
+              </b>
             </h4>
           </div>
         </b-nav-item>

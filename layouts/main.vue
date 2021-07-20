@@ -1,8 +1,5 @@
 <template>
-  <div
-    id="app"
-    style="background-color: rgba(46, 55, 64, 0.84); min-height: 100vh;"
-  >
+  <div id="app">
     <Navbar />
     <Nuxt />
     <div
@@ -18,6 +15,20 @@
 export default {
   data: () => ({
     isLoading: false
-  })
+  }),
+  mounted() {
+    this.loadMovies();
+  },
+  methods: {
+    loadMovies() {
+      this.isLoading = true;
+
+      this.$store
+        .dispatch("movie/fetchMovies")
+        .then()
+        .catch(console.error)
+        .finally(() => (this.isLoading = false));
+    }
+  }
 };
 </script>
